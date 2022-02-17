@@ -5,14 +5,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Set;
+
 @RestController
 @RequestMapping("/employee")
 
 public class EmployeeController {
 
-    private EmployeeService employeeService;
+    private EmployeeCollectionService employeeService;
 
-    public EmployeeController(EmployeeService employeeService) {
+    public EmployeeController(EmployeeCollectionService employeeService) {
         this.employeeService = employeeService;
     }
 
@@ -39,4 +41,10 @@ public class EmployeeController {
         Employee foundEmployee = employeeService.findEmployee(firstName, secondName);
         return foundEmployee;
     }
+
+    @GetMapping("/getAllEmployees")
+    public Set<Employee> getAllEmployees() {
+        return employeeService.getAllEmployees();
+    }
+
 }
